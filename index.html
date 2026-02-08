@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immenx - MRO Campaign Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-logo">Immenx</h1>
+                <nav class="header-nav">
+                    <a href="#" class="nav-link">Campaigns</a>
+                    <a href="#" class="nav-link">Admin</a>
+                    <div class="user-profile">
+                        <span class="username">John Doe</span>
+                        <div class="user-avatar">JD</div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <!-- Create Campaign Button -->
+                <div class="create-campaign-section">
+                    <button class="create-btn" id="openModalBtn">
+                        <span class="btn-icon">+</span>
+                        <span>Start New Campaign</span>
+                    </button>
+                </div>
+
+                <!-- Existing Campaigns Section -->
+                <section class="existing-campaigns-section">
+                    <h2 class="section-heading">Existing Campaigns</h2>
+                    <div class="campaigns-grid">
+                        <div class="campaign-card">
+                            <div class="campaign-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1631889993954-7b603c8c5347?w=400&h=300&fit=crop" alt="House Renovation" class="campaign-image">
+                                <div class="campaign-overlay">
+                                    <span class="campaign-status">Active</span>
+                                </div>
+                            </div>
+                            <div class="campaign-info">
+                                <h3 class="campaign-name">House Renovation</h3>
+                                <p class="campaign-meta">12 tasks • Updated 2 days ago</p>
+                            </div>
+                        </div>
+                        <div class="campaign-card">
+                            <div class="campaign-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop" alt="Shop Maintenance" class="campaign-image">
+                                <div class="campaign-overlay">
+                                    <span class="campaign-status">Active</span>
+                                </div>
+                            </div>
+                            <div class="campaign-info">
+                                <h3 class="campaign-name">Shop Maintenance</h3>
+                                <p class="campaign-meta">8 tasks • Updated 5 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- YPay Logo -->
+        <footer class="app-footer">
+            <div class="logo-container">
+                <span class="logo-text">YPay</span>
+                <span class="logo-arrow">→</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+            
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step-item active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Type</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Details</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">3D Design</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="4">
+                    <span class="step-number">4</span>
+                    <span class="step-label">Preview</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Define Campaign Type -->
+            <div class="form-step active" id="step1">
+                <h2 class="modal-title">Define the campaign</h2>
+                <form class="campaign-form" id="campaignTypeForm">
+                    <div class="form-options">
+                        <label class="option-label">
+                            <input type="radio" name="campaignType" value="residential" class="option-radio" checked>
+                            <span class="option-custom">
+                                <span class="option-indicator"></span>
+                                <span class="option-text">Residential</span>
+                            </span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="campaignType" value="business" class="option-radio">
+                            <span class="option-custom">
+                                <span class="option-indicator"></span>
+                                <span class="option-text">Business</span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+                        <button type="button" class="btn-continue" id="nextToStep2">Continue</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Campaign Details (simple form, all visible) -->
+            <div class="form-step" id="step2">
+                <div class="step2-header">
+                    <div class="step2-title-card">
+                        <input type="text" class="step2-title-input" id="step2CampaignTitle" placeholder="Campaign title" autocomplete="off" aria-label="Campaign title">
+                        <span class="step2-title-tag" id="step2TitleDefault">False Ceiling</span>
+                    </div>
+                </div>
+                <p class="step2-intro">Let's define your campaign — just answer in your own words.</p>
+                <form class="campaign-form step2-form" id="campaignDetailsForm">
+                    <div class="step2-form-group">
+                        <label class="step2-label" for="campaignGoal">1. What do you want to achieve in this campaign?</label>
+                        <span class="step2-hint">e.g. replace wallpapers in your bedroom, set a false ceiling…</span>
+                        <textarea class="step2-textarea" id="campaignGoal" placeholder="Type your answer here…" rows="3"></textarea>
+                    </div>
+                    <div class="step2-form-group">
+                        <label class="step2-label">2. Share Existing Architectural Designs, 3D Designs or images of your bedroom.</label>
+                        <span class="step2-hint">For images, share dimensions of your room.</span>
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <p class="upload-text">Click to upload or drag and drop</p>
+                                <p class="upload-hint">PNG, JPG, PDF up to 10MB</p>
+                            </div>
+                            <input type="file" id="fileInput" class="file-input" multiple accept="image/*,.pdf" style="display: none;">
+                        </div>
+                        <div class="uploaded-files" id="uploadedFiles"></div>
+                        <div class="example-image-preview" id="exampleImagePreview">
+                            <div class="preview-image-wrapper">
+                                <img src="images/1.png" alt="Bedroom Example - Before" class="preview-image">
+                                <div class="image-dimensions">3400 MM × 3400 MM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step2-form-group">
+                        <label class="step2-label" for="assetLocation">3. Share materials used in existing design or tell me where is the asset based and I'll consider best practices.</label>
+                        <input type="text" class="step2-input" id="assetLocation" placeholder="I'm based out of Cork, Ireland" autocomplete="off">
+                    </div>
+                    <div class="step2-form-group">
+                        <label class="step2-label">4. Share reference images for the design or prompt the design you want.</label>
+                        <label class="step2-sublabel" for="designPrompt">Prompt</label>
+                        <textarea class="step2-textarea" id="designPrompt" placeholder="e.g. Modern luxury bedroom with layered false ceiling, warm LED strip lighting, neutral palette, light wood trim and gold accents…" rows="3"></textarea>
+                        <div class="step2-reference-preview">
+                            <div class="preview-image-wrapper">
+                                <img src="images/2.png" alt="Reference design" class="preview-image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-back" id="backToStep1">Back</button>
+                        <button type="button" class="btn-continue" id="nextToStep3">Continue</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: 3D Design with Annotations -->
+            <div class="form-step" id="step3">
+                <div class="design-header">
+                    <h2 class="modal-title">3D Design Rendered</h2>
+                    <p class="design-subtitle">Add changes in design itself</p>
+                </div>
+                <div class="design-container-full">
+                    <div class="design-viewer-annotated">
+                        <div class="design-image-wrapper-large" id="designWrapper">
+                            <img src="images/3.png" alt="3D Design Rendered" class="design-image-annotated" id="designImageAnnotated">
+                            
+                            <!-- Drawing Canvas Overlay -->
+                            <canvas id="drawingCanvas" class="drawing-canvas"></canvas>
+                        </div>
+                        
+                        <div class="design-toolbar">
+                            <button class="tool-btn" id="drawModeBtn">
+                                <span class="tool-icon">□</span>
+                                <span>Draw Rectangle</span>
+                            </button>
+                            <button class="tool-btn" id="clearDrawingsBtn">
+                                <span class="tool-icon">×</span>
+                                <span>Clear All</span>
+                            </button>
+                        </div>
+                        
+                        <div class="design-instructions">
+                            <p class="instruction-text">Draw rectangles on design and add prompts</p>
+                            <div class="design-controls">
+                                <button class="control-btn" id="approveRerenderBtn">Re render</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Rectangle Prompts List -->
+                        <div class="rectangles-list" id="rectanglesList">
+                            <h3 class="rectangles-title">Change Requests</h3>
+                            <div class="rectangles-container" id="rectanglesContainer">
+                                <p class="no-rectangles">No rectangles drawn yet. Click "Draw Rectangle" to start.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-back" id="backToStep2">Back</button>
+                    <button type="button" class="btn-continue" id="nextToStep4">Continue</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Final Preview with Specs -->
+            <div class="form-step" id="step4">
+                <h2 class="modal-title">Design Preview & Specifications</h2>
+                <div class="preview-container">
+                    <!-- Before/After Comparison -->
+                    <div class="comparison-section">
+                        <div class="comparison-item">
+                            <h3 class="comparison-title">Before</h3>
+                            <p class="comparison-caption">Existing bedroom — no false ceiling</p>
+                            <div class="comparison-image-wrapper">
+                                <img src="images/1.png" alt="Before - Bedroom without false ceiling" class="comparison-image">
+                            </div>
+                        </div>
+                        <div class="comparison-arrow">→</div>
+                        <div class="comparison-item">
+                            <h3 class="comparison-title">After</h3>
+                            <p class="comparison-caption">Same bedroom with false ceiling</p>
+                            <div class="comparison-image-wrapper">
+                                <img src="images/2.png" alt="After - Bedroom with false ceiling" class="comparison-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specifications Grid -->
+                    <div class="specs-grid-full">
+                        <div class="spec-card-full">
+                            <h3 class="spec-title">Materials List →</h3>
+                            <ul class="spec-list-detailed">
+                                <li><strong>Gypsum False Ceiling</strong> - 200 MM DROP</li>
+                                <li><strong>Oak Effect Emulsion Paneling</strong> - 100 MM TRIM WIDTH, 100 MM RECCESS, 100 MM DROP</li>
+                                <li><strong>Sage Green Emulsion Paint</strong> - Back wall</li>
+                                <li><strong>White Shaker Wardrobe</strong> - 400 MM depth</li>
+                                <li><strong>White Effect Laminate Flooring</strong> - 3400 MM × 3400 MM</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="spec-card-full">
+                            <h3 class="spec-title">Project Timeline →</h3>
+                            <div class="timeline-specs">
+                                <div class="timeline-item">
+                                    <span class="timeline-label">Man Hours →</span>
+                                    <span class="timeline-value">120 hrs</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-label">Talent Hours →</span>
+                                    <span class="timeline-value">80 hrs</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-label">Lead Times →</span>
+                                    <span class="timeline-value">5 days</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-label">Estimated Timeline →</span>
+                                    <span class="timeline-value">3-4 weeks</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="spec-card-full highlight">
+                            <h3 class="spec-title">Cost →</h3>
+                            <div class="cost-breakdown-detailed">
+                                <div class="cost-item-detailed">
+                                    <span>Materials</span>
+                                    <span class="cost-amount">$4,500</span>
+                                </div>
+                                <div class="cost-item-detailed">
+                                    <span>Labor</span>
+                                    <span class="cost-amount">$3,200</span>
+                                </div>
+                                <div class="cost-item-detailed">
+                                    <span>Design & Planning</span>
+                                    <span class="cost-amount">$800</span>
+                                </div>
+                                <div class="cost-total-detailed">
+                                    <span>Total</span>
+                                    <span class="total-amount">$8,500</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-back" id="backToStep3">Back</button>
+                    <button type="button" class="btn-continue" id="submitCampaign">Create Campaign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
